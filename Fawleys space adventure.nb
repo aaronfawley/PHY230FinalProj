@@ -1,0 +1,419 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     14931,        409]
+NotebookOptionsPosition[     13902,        384]
+NotebookOutlinePosition[     14336,        401]
+CellTagsIndexPosition[     14293,        398]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", "\"\<`*\>\"", "]"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"planets", ":", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"x", ",", "z", ",", "y"}], "}"}], ",", "radius", ",", "mass", 
+       ",", " ", "color"}], "}"}]}], "}"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"planetList", " ", "=", " ", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "4"}], ",", "3", ",", 
+          RowBox[{"-", "2"}]}], "}"}], ",", "1", ",", "10", ",", "Green"}], 
+       "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"2", ",", "2", ",", "4"}], "}"}], ",", "2", ",", "100", ",", 
+        "Blue"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"2", ",", 
+          RowBox[{"-", "2"}], ",", 
+          RowBox[{"-", "1"}]}], "}"}], ",", "1", ",", "100", ",", "Orange"}], 
+       "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "4"}], ",", 
+          RowBox[{"-", "2"}], ",", 
+          RowBox[{"-", "3"}]}], "}"}], ",", "1", ",", "100", ",", "Red"}], 
+       "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"rocket", ":", " ", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"initial", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", "y", ",", "z"}], "}"}]}], ",", 
+      RowBox[{"initial", " ", "velocity", " ", "vec", " ", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "j", ",", "k"}], "}"}]}], ",", "mass", ",", 
+      "color"}], "}"}]}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"4", ",", "4", ",", "4"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "2"}], ",", "0", ",", 
+       RowBox[{"-", "2"}]}], "}"}], ",", "5", ",", "Blue"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"time", " ", "=", " ", "4"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"rocketPos", " ", "=", " ", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"r", "[", 
+         RowBox[{"[", 
+          RowBox[{"1", ",", "1"}], "]"}], "]"}], "+", 
+        RowBox[{
+         RowBox[{"r", "[", 
+          RowBox[{"[", 
+           RowBox[{"2", ",", "1"}], "]"}], "]"}], "t"}]}], ",", 
+       RowBox[{
+        RowBox[{"r", "[", 
+         RowBox[{"[", 
+          RowBox[{"1", ",", "2"}], "]"}], "]"}], "+", 
+        RowBox[{
+         RowBox[{"r", "[", 
+          RowBox[{"[", 
+           RowBox[{"2", ",", "2"}], "]"}], "]"}], "t"}]}], ",", 
+       RowBox[{
+        RowBox[{"r", "[", 
+         RowBox[{"[", 
+          RowBox[{"1", ",", "3"}], "]"}], "]"}], "+", 
+        RowBox[{
+         RowBox[{"r", "[", 
+          RowBox[{"[", 
+           RowBox[{"2", ",", "3"}], "]"}], "]"}], "t"}]}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"t", ",", "0", ",", "time", ",", "1"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"rocketGraphics", "=", " ", 
+  RowBox[{"{", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"planetGraphics", " ", "=", 
+     RowBox[{"planetList", "/.", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], ",", "rad_", ",", "b_",
+          ",", "col_"}], "}"}], "->", " ", 
+       RowBox[{"{", 
+        RowBox[{"col", ",", 
+         RowBox[{"Sphere", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"x", ",", "y", ",", "z"}], "}"}], ",", "rad"}], "]"}]}], 
+        "}"}]}]}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"Graphics3D", "[", "planetGraphics", "]"}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"ListPlot3D", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"0.5", ",", "0.5", ",", "0.5"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"4", ",", "4", ",", "4"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "0.5", ",", "1"}], "}"}]}], "}"}], ",", 
+      RowBox[{"Mesh", "->", "All"}]}], "]"}], ";", "\[IndentingNewLine]", 
+    RowBox[{"ListPlot3D", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "0", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "1", ",", "0"}], "}"}]}], "}"}], ",", 
+      RowBox[{"Mesh", "->", "All"}]}], "]"}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"ListPlot3D", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"1", ",", "1", ",", "1", ",", "1"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "2", ",", "1", ",", "2"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "1", ",", "3", ",", "1"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "2", ",", "1", ",", "10"}], "}"}]}], "}"}], ",", 
+       RowBox[{"Mesh", "->", "All"}]}], "]"}], "\[IndentingNewLine]", 
+     RowBox[{"ListPlot3D", "[", "rocketPos", "]"}], "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", "\[IndentingNewLine]"}]}]}]}]}], "Input",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGCQBmIQvcXG4u5MlbeOD1fo3QPRXl4mErOAtOil+kAQvVTo
+UhiItvj1GUynr1GKAdGuxuHJIHq+9ZssEM0w6XIOiE5aeLgARL8I+1MEovPs
+JlSBaO8lK8C08znBZhDtq1wKppVOyi8E0WVFAotAtBX7oQ0gWpZT7xiIfv07
+9ByInsMuewVs7t/UOyA6883+lyD67qf5b8HubfR9BzYvtP8n2D4zIanZQJop
+7LQOiP73yscYRE8wfWsJoq85r7MC0U++nvYG0UckdgeA6G8LMrNB9DbL3nIQ
+ffWrfz2IVtSyaQHRP9jYl4HoyeaqYLrrndkqEG3Hx7gGRL9TvHoIbF+o/VEQ
+neFcdhJEq+3qPQuiU43P3wDRWVfm3AbRBxz1X4LoL4apr0D04detP8DytqvA
+tNWseq45IP/07gbTAJSF1nQ=
+  "],ExpressionUUID->"499ad5e4-9979-47ca-a3cb-89ec97d41e64"],
+
+Cell[BoxData[
+ Graphics3DBox[{GraphicsComplex3DBox[CompressedData["
+1:eJxTTMoPSmViYGCQAGJmBhj4YI+dZnDALs6BQ1wAhzgu82B8dJoDjY9uPrp6
+XO5CNw9dHTotgEM9Lv/BzEd3F7p56PphNA+c3/fYAoi44OKofIR6Vc9JKp6T
+OOA0ujn4/YvpHkrtBQBxdz56
+    "], {
+     {RGBColor[0.880722, 0.611041, 0.142051], EdgeForm[GrayLevel[0.2]], 
+      Specularity[
+       GrayLevel[1], 3], 
+      StyleBox[
+       GraphicsGroup3DBox[{
+         Polygon3DBox[{{6, 1, 2}, {15, 10, 11}, {7, 2, 3}, {8, 3, 4}, {10, 5, 
+          6}, {12, 7, 8}, {1, 6, 5}, {14, 9, 10}, {11, 6, 7}, {10, 21, 14}, {
+          7, 20, 11}, {5, 10, 9}, {2, 7, 6}, {9, 14, 13}, {6, 11, 10}, {3, 8, 
+          7}}], Polygon3DBox[{{19, 11, 20, 17}, {23, 15, 11, 19}}]}],
+       Lighting->{{"Ambient", 
+          RGBColor[0.30100577, 0.22414668499999998`, 0.090484535]}, {
+         "Directional", 
+          RGBColor[0.2642166, 0.18331229999999998`, 0.04261530000000001], 
+          ImageScaled[{0, 2, 2}]}, {"Directional", 
+          RGBColor[0.2642166, 0.18331229999999998`, 0.04261530000000001], 
+          ImageScaled[{2, 2, 2}]}, {"Directional", 
+          RGBColor[0.2642166, 0.18331229999999998`, 0.04261530000000001], 
+          ImageScaled[{2, 0, 2}]}}]}, {}, 
+     {GrayLevel[1], EdgeForm[None], 
+      StyleBox[GraphicsGroup3DBox[Polygon3DBox[{{24, 16, 18}, {22, 16, 24}}]],
+       Lighting->{{"Ambient", 
+          GrayLevel[0.8]}}]}, {}, {}},
+    VertexNormals->CompressedData["
+1:eJxTTMoPSmViYGCQAGJmILbX4SnYq3BrPyr9yj42Yxb3vM7T9lKGwefPLLy3
+//Ud34BK29f2Uy1uV1cFXtwPo917jc5nT3hrzwAFZ63r0+YteLYfSsP1w8yD
+mVP1pODCNZnL+2H0F4MZ0v2Mb+1DX3/JmsC3w/6J6PKIRocb+5+VS8+7X/rW
+/vTRRru8wIf7b/nz8j78u3q/gbB2msitVzjdA9MfBTUPZs4Uh9sFa6vu758A
+pVdIW11M/PvMXtZ4guvyykf7oTSMbw/zD5r/7GHugLkL5p452xb6rMp4vT/Z
+0MNGofuuPYQ+Cw8fVPDB3qE5YtfbWaftN0xeXOjN936/HZi/G6f6u1vF3j3T
+fbb/FpR2Wt3+mj3ypH0i1L65UPsToPai+QfuP1zmw9zhC3WXLwH3AAD2UPbP
+
+     "]], {}, {{}, {}}},
+  Axes->True,
+  AxesLabel->{None, None, None},
+  BoxRatios->{1, 1, 0.4},
+  DisplayFunction->Identity,
+  FaceGridsStyle->Automatic,
+  ImageSize->{319.17049387993507`, 321.07402997058745`},
+  ImageSizeRaw->Automatic,
+  Method->{"DefaultBoundaryStyle" -> Directive[
+      GrayLevel[0.3]], 
+    "DefaultGraphicsInteraction" -> {
+     "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+      "Effects" -> {
+       "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+        "Droplines" -> {
+         "freeformCursorMode" -> True, 
+          "placement" -> {"x" -> "All", "y" -> "None"}}}}, "RotationControl" -> 
+    "Globe"},
+  PlotRange->{Full, Full, All},
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.02], 
+     Scaled[0.02]}},
+  Ticks->{Automatic, Automatic, Automatic},
+  ViewPoint->{0.7640108458916026, 1.8837680749146108`, 2.70512573964548},
+  ViewVertical->{-0.5880040410826712, -0.5764029059649256, 
+   0.5674600758340955}]], "Output",
+ CellChangeTimes->{{3.9115068409705653`*^9, 3.911506876806572*^9}, {
+   3.9115069508376284`*^9, 3.911506978211787*^9}, 3.9115072495241547`*^9, 
+   3.911507296518959*^9, {3.9115074853418975`*^9, 3.911507498519307*^9}, {
+   3.911507546570634*^9, 3.9115075647598467`*^9}, {3.911507656762903*^9, 
+   3.9115076773725877`*^9}},
+ CellLabel->
+  "Out[1095]=",ExpressionUUID->"fa76f529-e988-4ee8-968f-4688393a56c0"],
+
+Cell[BoxData[
+ Graphics3DBox[{
+   GraphicsComplex3DBox[{{4., 4., 4.}, {2., 4., 2.}, {0., 4., 0.}, {-2., 
+    4., -2.}, {-4., 4., -4.}}, 
+    StyleBox[{},
+     VertexNormals -> {{0., 0., 0.}, {0., 0., 0.}, {0., 0., 0.}, {0., 0., 
+      0.}, {0., 0., 0.}}]], {}, {{}, {}}},
+  Axes->True,
+  AxesLabel->{None, None, None},
+  BoxRatios->{1, 1, 0.4},
+  DisplayFunction->Identity,
+  FaceGridsStyle->Automatic,
+  ImageSize->{295.55253068809105`, 318.0051116991421},
+  ImageSizeRaw->Automatic,
+  Method->{"DefaultBoundaryStyle" -> Directive[
+      GrayLevel[0.3]], 
+    "DefaultGraphicsInteraction" -> {
+     "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+      "Effects" -> {
+       "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+        "Droplines" -> {
+         "freeformCursorMode" -> True, 
+          "placement" -> {"x" -> "All", "y" -> "None"}}}}, "RotationControl" -> 
+    "Globe"},
+  PlotRange->{Full, Full, All},
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.02], 
+     Scaled[0.02]}},
+  Ticks->{Automatic, Automatic, Automatic},
+  ViewPoint->{-0.041245842418957346`, -3.381494358477088, 0.1174507729680363},
+  ViewVertical->{0.12834445917610354`, -0.6980064227664639, 
+   0.7044960848546699}]], "Output",
+ CellChangeTimes->{{3.9115068409705653`*^9, 3.911506876806572*^9}, {
+   3.9115069508376284`*^9, 3.911506978211787*^9}, 3.9115072495241547`*^9, 
+   3.911507296518959*^9, {3.9115074853418975`*^9, 3.911507498519307*^9}, {
+   3.911507546570634*^9, 3.9115075647598467`*^9}, {3.911507656762903*^9, 
+   3.9115076774634676`*^9}},
+ CellLabel->
+  "Out[1096]=",ExpressionUUID->"b933d611-d18a-40a7-9e85-8fc637cc0808"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"Graphics3D", "[", 
+  RowBox[{"{", 
+   RowBox[{"Blue", ",", 
+    RowBox[{"Cylinder", "[", "]"}], ",", "Red", ",", 
+    RowBox[{"Sphere", "[", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", "2"}], "}"}], "]"}], ",", "Black", ",", 
+    "Thick", ",", "Dashed", ",", 
+    RowBox[{"Line", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "2"}], ",", "0", ",", "2"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"2", ",", "0", ",", "2"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "0", ",", "4"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "2"}], ",", "0", ",", "2"}], "}"}]}], "}"}], "]"}], ",",
+     "Yellow", ",", 
+    RowBox[{"Polygon", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "3"}], ",", 
+         RowBox[{"-", "3"}], ",", 
+         RowBox[{"-", "2"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "3"}], ",", "3", ",", 
+         RowBox[{"-", "2"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"3", ",", "3", ",", 
+         RowBox[{"-", "2"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"3", ",", 
+         RowBox[{"-", "3"}], ",", 
+         RowBox[{"-", "2"}]}], "}"}]}], "}"}], "]"}], ",", "Green", ",", 
+    RowBox[{"Opacity", "[", ".3", "]"}], ",", 
+    RowBox[{"Cuboid", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "2"}], ",", 
+        RowBox[{"-", "2"}], ",", 
+        RowBox[{"-", "2"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"2", ",", "2", ",", 
+        RowBox[{"-", "1"}]}], "}"}]}], "]"}]}], "}"}], "]"}]], "Input",Express\
+ionUUID->"de160b88-0350-436c-a73a-b8f92afddd00"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.911507429100956*^9, 
+  3.9115074588401585`*^9}},ExpressionUUID->"8d3349b8-788a-4cef-ba9e-\
+3dc3d6167fde"],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{{3.911507439512391*^9, 3.911507456038191*^9}},
+ CellLabel->
+  "Out[990]=",ExpressionUUID->"c7a347cf-9df6-42e4-b7e5-91ef33a39490"],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{{3.911507439512391*^9, 3.9115074560632553`*^9}},
+ CellLabel->
+  "Out[991]=",ExpressionUUID->"e8c608ce-15b8-49ad-a3d4-ed051f2be79b"]
+}, Open  ]]
+},
+WindowSize->{478., 525.5},
+WindowMargins->{{Automatic, -4.5}, {Automatic, 0}},
+Magnification:>1.1 Inherited,
+FrontEndVersion->"13.1 for Microsoft Windows (64-bit) (August 22, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"9d54fda6-5808-4e53-bed6-f33ffe94c407"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 5937, 167, 660, "Input",ExpressionUUID->"499ad5e4-9979-47ca-a3cb-89ec97d41e64"],
+Cell[6520, 191, 3313, 73, 387, "Output",ExpressionUUID->"fa76f529-e988-4ee8-968f-4688393a56c0"],
+Cell[9836, 266, 1719, 42, 383, "Output",ExpressionUUID->"b933d611-d18a-40a7-9e85-8fc637cc0808"]
+}, Open  ]],
+Cell[11570, 311, 1769, 53, 178, "Input",ExpressionUUID->"de160b88-0350-436c-a73a-b8f92afddd00"],
+Cell[CellGroupData[{
+Cell[13364, 368, 154, 3, 31, "Input",ExpressionUUID->"8d3349b8-788a-4cef-ba9e-3dc3d6167fde"],
+Cell[13521, 373, 180, 3, 35, "Output",ExpressionUUID->"c7a347cf-9df6-42e4-b7e5-91ef33a39490"],
+Cell[13704, 378, 182, 3, 35, "Output",ExpressionUUID->"e8c608ce-15b8-49ad-a3d4-ed051f2be79b"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
