@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     19638,        467]
-NotebookOptionsPosition[     18784,        444]
-NotebookOutlinePosition[     19231,        461]
-CellTagsIndexPosition[     19188,        458]
+NotebookDataLength[     23621,        573]
+NotebookOptionsPosition[     22673,        549]
+NotebookOutlinePosition[     23117,        566]
+CellTagsIndexPosition[     23074,        563]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -33,127 +33,166 @@ Cell[BoxData[
         "questions"}], "/", "20077"}], "/", "simulating"}], "-", "gravity", 
      "-", "in", "-", 
      RowBox[{"3", "d"}], "-", "game"}]}], "*)"}], "\[IndentingNewLine]", 
-  RowBox[{"(*", 
+  "\[IndentingNewLine]", 
+  RowBox[{
    RowBox[{
-    RowBox[{
-     RowBox[{
+    RowBox[{"rocketinfo", "=", 
+     RowBox[{"{", 
       RowBox[{
-      "JOHN", " ", "IGNORE", " ", "THIS", " ", "CELL", " ", "NEIGHBOR", " ", 
-       "MUTHA"}], "-", "\[IndentingNewLine]", "G"}], " ", "=", " ", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "0", ",", "0"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"250", ",", "0", ",", "0"}], "}"}], ",", "50", ",", "Blue"}], 
+      "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"planetinfo", " ", "=", "  ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "4"}], ",", "3", ",", 
+           RowBox[{"-", "2"}]}], "}"}], ",", "1", ",", "10", ",", "Green"}], 
+        "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"2", ",", "2", ",", "4"}], "}"}], ",", "2", ",", "100", ",",
+          "Blue"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"2", ",", 
+           RowBox[{"-", "2"}], ",", 
+           RowBox[{"-", "1"}]}], "}"}], ",", "1", ",", "100", ",", "Orange"}],
+         "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "4"}], ",", 
+           RowBox[{"-", "2"}], ",", 
+           RowBox[{"-", "3"}]}], "}"}], ",", "1", ",", "100", ",", "Red"}], 
+        "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"G", " ", "=", " ", 
      RowBox[{"QuantityMagnitude", "@", 
       RowBox[{"UnitConvert", "[", 
        RowBox[{"Quantity", "[", "\"\<GravitationalConstant\>\"", "]"}], 
-       "]"}]}]}], ";", "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{"calcpos", "[", 
-      RowBox[{"rocketinfo_list", ",", "planetinfo_list", ",", "dt_"}], "]"}], 
-     ":=", "\[IndentingNewLine]", 
+       "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"calcpos", "[", 
+     RowBox[{"rocketinfo_list", ",", "planetinfo_list", ",", "dt_"}], "]"}], ":=",
+     "\[IndentingNewLine]", 
+    RowBox[{"Module", "[", 
      RowBox[{
-      RowBox[{"Module", "[", 
+      RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"rocketpath", " ", "=", " ", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
        RowBox[{
-        RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
-        RowBox[{
-         RowBox[{"rocketpath", "=", 
-          RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"distfunc", "[", 
+         RowBox[{"pos1_", ",", "pos2_"}], "]"}], ":=", 
+        RowBox[{"Sqrt", "[", 
          RowBox[{
-          RowBox[{"distfunc", "[", 
-           RowBox[{"pos1_", ",", "pos2_"}], "]"}], ":=", 
+          RowBox[{"(", 
+           RowBox[{"pos1", "-", "pos2"}], ")"}], "^", "2"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"latestPos", " ", "=", " ", 
+        RowBox[{"rocketinfo", "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"latestVelocity", "=", 
+        RowBox[{"rocketinfo", "[", 
+         RowBox[{"[", "2", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"SumForcex", "=", 
+        RowBox[{"Total", "[", 
+         RowBox[{"planetinfo", "/.", 
           RowBox[{
-           RowBox[{"(", 
-            RowBox[{"pos1", "-", "pos2"}], ")"}], "^", "2"}]}], ";", 
-         "\[IndentingNewLine]", 
-         RowBox[{"latestPos", " ", "=", " ", 
-          RowBox[{"rocketinfo", "[", 
-           RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
-         RowBox[{"latestVelocity", " ", "=", " ", 
-          RowBox[{"rocketinfo", "[", 
-           RowBox[{"[", "2", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
-         RowBox[{"SumForcex", "=", 
-          RowBox[{"planetinfo", "/.", 
-           RowBox[{
-            RowBox[{"{", 
-             RowBox[{
-              RowBox[{"{", 
-               RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], ",", "rad_", ",", 
-              "mass_", ",", "col_"}], "}"}], "->", 
-            RowBox[{"G", "*", 
-             RowBox[{
-              RowBox[{"(", 
-               RowBox[{"mass", "*", 
-                RowBox[{"rocketinfo", "[", 
-                 RowBox[{"[", "3", "]"}], "]"}]}], ")"}], "/", 
-              RowBox[{"distfunc", "[", 
-               RowBox[{
-                RowBox[{"latestPos", "[", 
-                 RowBox[{"[", "1", "]"}], "]"}], ",", "x"}], "]"}]}]}]}]}]}], 
-         ";", "\[IndentingNewLine]", 
-         RowBox[{"SumForcey", "=", 
-          RowBox[{"planetinfo", "/.", 
-           RowBox[{
-            RowBox[{"{", 
-             RowBox[{
-              RowBox[{"{", 
-               RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], ",", "rad_", ",", 
-              "mass_", ",", "col_"}], "}"}], "->", 
-            RowBox[{"G", "*", 
-             RowBox[{
-              RowBox[{"(", 
-               RowBox[{"mass", "*", 
-                RowBox[{"rocketinfo", "[", 
-                 RowBox[{"[", "3", "]"}], "]"}]}], ")"}], "/", 
-              RowBox[{"distfunc", "[", 
-               RowBox[{
-                RowBox[{"latestPos", "[", 
-                 RowBox[{"[", "2", "]"}], "]"}], ",", "y"}], "]"}]}]}]}]}]}], 
-         ";", "\[IndentingNewLine]", 
-         RowBox[{"SumForcez", "=", 
-          RowBox[{"planetinfo", "/.", 
-           RowBox[{
-            RowBox[{"{", 
-             RowBox[{
-              RowBox[{"{", 
-               RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], ",", "rad_", ",", 
-              "mass_", ",", "col_"}], "}"}], "->", 
-            RowBox[{"G", "*", 
-             RowBox[{
-              RowBox[{"(", 
-               RowBox[{"mass", "*", 
-                RowBox[{"rocketinfo", "[", 
-                 RowBox[{"[", "3", "]"}], "]"}]}], ")"}], "/", 
-              RowBox[{"distfunc", "[", 
-               RowBox[{
-                RowBox[{"latestPos", "[", 
-                 RowBox[{"[", "3", "]"}], "]"}], ",", "z"}], "]"}]}]}]}]}]}], 
-         ";", "\[IndentingNewLine]", 
-         RowBox[{"AccList", " ", "=", " ", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], ",", "rad_", ",", 
+             "mass_", ",", "col_"}], "}"}], "->", 
+           RowBox[{"G", "*", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"mass", "*", 
+               RowBox[{"rocketinfo", "[", 
+                RowBox[{"[", "3", "]"}], "]"}]}], ")"}], "/", 
+             RowBox[{"distfunc", "[", 
+              RowBox[{
+               RowBox[{"latestPos", "[", 
+                RowBox[{"[", "1", "]"}], "]"}], ",", "x"}], "]"}]}]}]}]}], 
+         "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"SumForcey", "=", 
+        RowBox[{"Total", "[", 
+         RowBox[{"planetinfo", "/.", 
           RowBox[{
-           RowBox[{"List", "[", 
-            RowBox[{"SumForcex", ",", "SumForcey", ",", "SumForcez"}], "]"}], 
-           "/", 
-           RowBox[{"rocketinfo", "[", 
-            RowBox[{"[", "3", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
-         RowBox[{"latestVelocity", " ", "=", " ", 
-          RowBox[{"latestVelocity", "+", 
-           RowBox[{"AccList", "*", "dt"}]}]}], ";", "\[IndentingNewLine]", 
-         RowBox[{"While", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], ",", "rad_", ",", 
+             "mass_", ",", "col_"}], "}"}], "->", 
+           RowBox[{"G", "*", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"mass", "*", 
+               RowBox[{"rocketinfo", "[", 
+                RowBox[{"[", "3", "]"}], "]"}]}], ")"}], "/", 
+             RowBox[{"distfunc", "[", 
+              RowBox[{
+               RowBox[{"latestPos", "[", 
+                RowBox[{"[", "2", "]"}], "]"}], ",", "y"}], "]"}]}]}]}]}], 
+         "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"SumForcez", "=", 
+        RowBox[{"Total", "[", 
+         RowBox[{"planetinfo", "/.", 
           RowBox[{
-           RowBox[{
-            RowBox[{"latestPos", "[", 
-             RowBox[{"[", "1", "]"}], "]"}], "<", "1000"}], ",", 
-           RowBox[{
-            RowBox[{"latestPos", " ", "=", 
-             RowBox[{"latestPos", " ", "+", " ", 
-              RowBox[{"latestVelocity", "*", "dt"}], " ", "+", " ", 
-              RowBox[{"0.5", "*", "AccList", "*", 
-               RowBox[{"dt", "^", "2"}]}]}]}], ";", 
-            RowBox[{"AppendTo", "[", 
-             RowBox[{"rocketpath", ",", "latestPos"}], "]"}]}]}], "]"}], ";", 
-         "\[IndentingNewLine]", "latestPos"}]}], "\[IndentingNewLine]", 
-       "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", 
-      "\[IndentingNewLine]", 
-      RowBox[{"calcpos", "[", 
-       RowBox[{"rocketinfo", ",", "planetinfo", ",", "0.01"}], "]"}]}]}]}], 
-   "*)"}], "\[IndentingNewLine]"}]], "Input",
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], ",", "rad_", ",", 
+             "mass_", ",", "col_"}], "}"}], "->", 
+           RowBox[{"G", "*", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"mass", "*", 
+               RowBox[{"rocketinfo", "[", 
+                RowBox[{"[", "3", "]"}], "]"}]}], ")"}], "/", 
+             RowBox[{"distfunc", "[", 
+              RowBox[{
+               RowBox[{"latestPos", "[", 
+                RowBox[{"[", "3", "]"}], "]"}], ",", "z"}], "]"}]}]}]}]}], 
+         "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"AccList", " ", "=", " ", 
+        RowBox[{
+         RowBox[{"List", "[", 
+          RowBox[{"SumForcex", ",", "SumForcey", ",", "SumForcez"}], "]"}], 
+         "/", 
+         RowBox[{"rocketinfo", "[", 
+          RowBox[{"[", "3", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"latestVelocity", " ", "=", " ", 
+        RowBox[{"latestVelocity", "+", 
+         RowBox[{"AccList", "*", "dt"}]}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"While", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"latestPos", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "<", "10000"}], ",", 
+         RowBox[{
+          RowBox[{"latestPos", " ", "=", 
+           RowBox[{"latestPos", " ", "+", " ", 
+            RowBox[{"latestVelocity", "*", "dt"}], " ", "+", " ", 
+            RowBox[{"0.5", "*", "AccList", "*", 
+             RowBox[{"dt", "^", "2"}]}]}]}], ";", 
+          RowBox[{"AppendTo", "[", 
+           RowBox[{"rocketpath", ",", "latestPos"}], "]"}]}]}], "]"}], ";", 
+       "\[IndentingNewLine]", "latestPos"}]}], "\[IndentingNewLine]", "]"}]}],
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"calcpos", "[", 
+    RowBox[{"rocketinfo", ",", "planetinfo", ",", "0.01"}], "]"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
  CellChangeTimes->{{3.911504167121538*^9, 3.91150418526116*^9}, {
    3.9115043379935303`*^9, 3.9115044062225013`*^9}, {3.911504466232568*^9, 
    3.9115044683463125`*^9}, 3.91150455246709*^9, {3.9115046583669558`*^9, 
@@ -217,8 +256,11 @@ Cell[BoxData[
    3.911584880042557*^9, 3.9115849090024023`*^9}, {3.911585180591111*^9, 
    3.911585201641279*^9}, {3.9115863818179026`*^9, 3.911586382756711*^9}, {
    3.9115864209306827`*^9, 3.9115864664154215`*^9}, {3.9115872589974*^9, 
-   3.9115872743590713`*^9}},ExpressionUUID->"8901a448-00b7-4b02-ab8f-\
-5c54444f01d5"],
+   3.9115872743590713`*^9}, {3.911659961193678*^9, 3.9116599739385004`*^9}, {
+   3.9116600670952344`*^9, 3.9116601290067616`*^9}, {3.9116601699594145`*^9, 
+   3.911660180163602*^9}},
+ CellLabel->
+  "In[289]:=",ExpressionUUID->"8901a448-00b7-4b02-ab8f-5c54444f01d5"],
 
 Cell[BoxData[
  RowBox[{"calcpos", "[", 
@@ -234,17 +276,51 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{
      RowBox[{"{", 
-      RowBox[{"500", ",", "3000", ",", "200"}], "}"}], ",", "5", ",", 
-     "6.12`*^12", ",", 
-     TemplateBox[<|"color" -> RGBColor[0, 0, 1]|>,
-      "RGBColorSwatchTemplate"]}], "}"}], ",", "0.01`"}], "]"}]], "Output",
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "4"}], ",", "3", ",", 
+         RowBox[{"-", "2"}]}], "}"}], ",", "1", ",", "10", ",", 
+       TemplateBox[<|"color" -> RGBColor[0, 1, 0]|>,
+        "RGBColorSwatchTemplate"]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"2", ",", "2", ",", "4"}], "}"}], ",", "2", ",", "100", ",", 
+       TemplateBox[<|"color" -> RGBColor[0, 0, 1]|>,
+        "RGBColorSwatchTemplate"]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"2", ",", 
+         RowBox[{"-", "2"}], ",", 
+         RowBox[{"-", "1"}]}], "}"}], ",", "1", ",", "100", ",", 
+       TemplateBox[<|"color" -> RGBColor[1, 0.5, 0]|>,
+        "RGBColorSwatchTemplate"]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "4"}], ",", 
+         RowBox[{"-", "2"}], ",", 
+         RowBox[{"-", "3"}]}], "}"}], ",", "1", ",", "100", ",", 
+       TemplateBox[<|"color" -> RGBColor[1, 0, 0]|>,
+        "RGBColorSwatchTemplate"]}], "}"}]}], "}"}], ",", "0.01`"}], 
+  "]"}]], "Output",
  CellChangeTimes->{
   3.9115845134411297`*^9, 3.9115845451428757`*^9, {3.91158459029881*^9, 
    3.9115846186950893`*^9}, 3.9115846610035787`*^9, 3.911584822073311*^9, 
    3.911584909800696*^9, 3.9115851880384703`*^9, 3.9115863530955763`*^9, 
-   3.911586383771483*^9, {3.9115864213891706`*^9, 3.911586440936079*^9}},
- CellLabel->"Out[70]=",ExpressionUUID->"ee645b80-9218-47a4-ad46-35b12b1ca017"]
+   3.911586383771483*^9, {3.9115864213891706`*^9, 3.911586440936079*^9}, 
+   3.9116600463234324`*^9, 3.911660101744252*^9, 3.9116601882669044`*^9},
+ CellLabel->
+  "Out[293]=",ExpressionUUID->"4f0c7983-6cf8-41e9-8a88-0bcc88f41253"]
 }, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.9116603388979406`*^9, 
+  3.9116603424873734`*^9}},ExpressionUUID->"e5206df1-eccc-468d-a982-\
+cbd81e31384b"],
 
 Cell[CellGroupData[{
 
@@ -259,32 +335,37 @@ Cell[BoxData[{
       RowBox[{"250", ",", "0", ",", "0"}], "}"}], ",", "50", ",", "Blue"}], 
     "}"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{
-   RowBox[{"planetinfo", " ", "=", " ", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{
-        RowBox[{"{", 
-         RowBox[{"500", ",", "3000", ",", "200"}], "}"}], ",", "5", ",", 
-        RowBox[{"6.132", "*", 
-         RowBox[{"10", "^", "18"}]}], ",", "Blue"}], "}"}], ",", 
-      RowBox[{"{", 
-       RowBox[{
-        RowBox[{"{", 
-         RowBox[{"4000", ",", "1002", ",", "3245"}], "}"}], ",", "20", ",", 
-        RowBox[{"9.876", "*", 
-         RowBox[{"10", "^", "23"}]}], ",", "Yellow"}], "}"}]}], "}"}]}], 
-   ";"}], 
-  RowBox[{"(*", 
-   RowBox[{
+  RowBox[{"planetinfo", " ", "=", "  ", 
+   RowBox[{"{", 
     RowBox[{
-     RowBox[{
+     RowBox[{"{", 
       RowBox[{
-      "it", " ", "works", " ", "when", " ", "planet", " ", "info", " ", "has",
-        " ", "1", " ", "but", " ", "not", " ", "with", " ", "two"}], "..."}], 
-     ".."}], " ", "You", " ", "probably", " ", "know", " ", "da", " ", 
-    "way"}], "*)"}]}], "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "4000"}], ",", "300", ",", 
+         RowBox[{"-", "200"}]}], "}"}], ",", "1", ",", 
+       RowBox[{"7", "*", 
+        RowBox[{"10", "^", "7"}]}], ",", "Green"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"203834", ",", "2345", ",", "44384"}], "}"}], ",", "2", ",", 
+       "100000", ",", "Blue"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"2", ",", 
+         RowBox[{"-", "2"}], ",", 
+         RowBox[{"-", "1"}]}], "}"}], ",", "1", ",", "100", ",", "Orange"}], 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "4"}], ",", 
+         RowBox[{"-", "2"}], ",", 
+         RowBox[{"-", "3"}]}], "}"}], ",", "1", ",", "1000000", ",", "Red"}], 
+      "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"G", " ", "=", " ", 
    RowBox[{"QuantityMagnitude", "@", 
@@ -315,64 +396,67 @@ Cell[BoxData[{
   RowBox[{"dt", "=", "0.01"}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"SumForcex", "=", 
-   RowBox[{"planetinfo", "/.", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], ",", "rad_", ",", 
-       "mass_", ",", "col_"}], "}"}], "->", 
-     RowBox[{"G", "*", 
-      RowBox[{
-       RowBox[{"(", 
-        RowBox[{"mass", "*", 
-         RowBox[{"rocketinfo", "[", 
-          RowBox[{"[", "3", "]"}], "]"}]}], ")"}], "/", 
-       RowBox[{"distfunc", "[", 
-        RowBox[{
-         RowBox[{"latestPos", "[", 
-          RowBox[{"[", "1", "]"}], "]"}], ",", "x"}], "]"}]}]}]}]}]}], 
-  ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Total", "[", 
+    RowBox[{"planetinfo", "/.", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], ",", "rad_", ",", 
+        "mass_", ",", "col_"}], "}"}], "->", 
+      RowBox[{"G", "*", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"mass", "*", 
+          RowBox[{"rocketinfo", "[", 
+           RowBox[{"[", "3", "]"}], "]"}]}], ")"}], "/", 
+        RowBox[{"distfunc", "[", 
+         RowBox[{
+          RowBox[{"latestPos", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], ",", "x"}], "]"}]}]}]}]}], "]"}]}],
+   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"SumForcey", "=", 
-   RowBox[{"planetinfo", "/.", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], ",", "rad_", ",", 
-       "mass_", ",", "col_"}], "}"}], "->", 
-     RowBox[{"G", "*", 
-      RowBox[{
-       RowBox[{"(", 
-        RowBox[{"mass", "*", 
-         RowBox[{"rocketinfo", "[", 
-          RowBox[{"[", "3", "]"}], "]"}]}], ")"}], "/", 
-       RowBox[{"distfunc", "[", 
-        RowBox[{
-         RowBox[{"latestPos", "[", 
-          RowBox[{"[", "2", "]"}], "]"}], ",", "y"}], "]"}]}]}]}]}]}], 
-  ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Total", "[", 
+    RowBox[{"planetinfo", "/.", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], ",", "rad_", ",", 
+        "mass_", ",", "col_"}], "}"}], "->", 
+      RowBox[{"G", "*", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"mass", "*", 
+          RowBox[{"rocketinfo", "[", 
+           RowBox[{"[", "3", "]"}], "]"}]}], ")"}], "/", 
+        RowBox[{"distfunc", "[", 
+         RowBox[{
+          RowBox[{"latestPos", "[", 
+           RowBox[{"[", "2", "]"}], "]"}], ",", "y"}], "]"}]}]}]}]}], "]"}]}],
+   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"SumForcez", "=", 
-   RowBox[{"planetinfo", "/.", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], ",", "rad_", ",", 
-       "mass_", ",", "col_"}], "}"}], "->", 
-     RowBox[{"G", "*", 
-      RowBox[{
-       RowBox[{"(", 
-        RowBox[{"mass", "*", 
-         RowBox[{"rocketinfo", "[", 
-          RowBox[{"[", "3", "]"}], "]"}]}], ")"}], "/", 
-       RowBox[{"distfunc", "[", 
-        RowBox[{
-         RowBox[{"latestPos", "[", 
-          RowBox[{"[", "3", "]"}], "]"}], ",", "z"}], "]"}]}]}]}]}]}], 
-  ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Total", "[", 
+    RowBox[{"planetinfo", "/.", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], ",", "rad_", ",", 
+        "mass_", ",", "col_"}], "}"}], "->", 
+      RowBox[{"G", "*", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"mass", "*", 
+          RowBox[{"rocketinfo", "[", 
+           RowBox[{"[", "3", "]"}], "]"}]}], ")"}], "/", 
+        RowBox[{"distfunc", "[", 
+         RowBox[{
+          RowBox[{"latestPos", "[", 
+           RowBox[{"[", "3", "]"}], "]"}], ",", "z"}], "]"}]}]}]}]}], "]"}]}],
+   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"AccList", " ", "=", " ", 
    RowBox[{
@@ -412,38 +496,59 @@ Cell[BoxData[{
   3.911585061676136*^9, 3.9115850702649193`*^9}, {3.9115864692673793`*^9, 
   3.9115864854307117`*^9}, {3.9115866056311026`*^9, 3.911586629045558*^9}, {
   3.911586749560749*^9, 3.911586765059659*^9}, {3.9115872826612854`*^9, 
-  3.9115873033420553`*^9}},ExpressionUUID->"a5ea414e-8ef3-4cdc-84ec-\
-1d430f03db7b"],
+  3.9115873033420553`*^9}, {3.911588921756631*^9, 3.9115889775076847`*^9}, {
+  3.9115890298268137`*^9, 3.9115890511215453`*^9}, {3.9116604166519947`*^9, 
+  3.9116604649126062`*^9}},
+ CellLabel->
+  "In[330]:=",ExpressionUUID->"a5ea414e-8ef3-4cdc-84ec-1d430f03db7b"],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
-   RowBox[{"{", 
-    RowBox[{"125.28042280000001`", ",", "2.471829505`*^6"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"20.4634038`", ",", "9.867572874251496`*^6"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"306.951057`", ",", "3.046936215716487`*^6"}], "}"}]}], 
-  "}"}]], "Output",
+  "10000.000010714644`", ",", "0.000029370630000020835`", ",", 
+   "0.00002736872480575353`"}], "}"}]], "Output",
  CellChangeTimes->{{3.9115848490419264`*^9, 3.911584864791128*^9}, 
    3.911585062302944*^9, 3.9115862893368053`*^9, {3.911586327516799*^9, 
    3.911586355938495*^9}, 3.91158638613988*^9, {3.9115864526415753`*^9, 
-   3.911586485683336*^9}, 3.9115866293958635`*^9, 3.911586765997308*^9},
+   3.911586485683336*^9}, 3.9115866293958635`*^9, 3.911586765997308*^9, {
+   3.91158892268918*^9, 3.9115889784724355`*^9}, 3.9115890534707556`*^9, 
+   3.9116603763369465`*^9, {3.9116604504584484`*^9, 3.9116604654528866`*^9}},
  CellLabel->
-  "Out[169]=",ExpressionUUID->"76e9a4b5-1e1f-4205-b991-e440e5a924ba"],
+  "Out[346]=",ExpressionUUID->"07f0aabd-b3c7-47e2-bb15-ad1f0926b845"],
 
 Cell[BoxData[
- RowBox[{"{", "}"}]], "Output",
+ TemplateBox[<|"shortenedBoxes" -> TagBox[
+     RowBox[{"{", 
+       RowBox[{
+         RowBox[{"{", 
+           
+           RowBox[{"5.000000005357136`", ",", "1.4685315000010656`*^-8", ",", 
+             "1.3684362402878507`*^-8"}], "}"}], ",", 
+         RowBox[{"{", 
+           
+           RowBox[{"7.5000000080357045`", ",", "2.202797250001598`*^-8", ",", 
+             "2.052654360431776`*^-8"}], "}"}], ",", 
+         TemplateBox[{"3996"}, "OutputSizeLimit`Skeleton"], ",", 
+         RowBox[{"{", 
+           
+           RowBox[{"10000.000010714644`", ",", "0.000029370630000020835`", 
+             ",", "0.00002736872480575353`"}], "}"}]}], "}"}], Short[#, 5]& ],
+    "line" -> 347, "sessionID" -> 33834337207714320771, "byteCount" -> 480656,
+    "size" -> 5, "stored" -> False, "expr" -> Missing["NotStored"], "wrap" -> 
+   OutputSizeLimit`Defer, "version" -> 1|>,
+  "OutputSizeLimitTemplate"]], "Output",
  CellChangeTimes->{{3.9115848490419264`*^9, 3.911584864791128*^9}, 
    3.911585062302944*^9, 3.9115862893368053`*^9, {3.911586327516799*^9, 
    3.911586355938495*^9}, 3.91158638613988*^9, {3.9115864526415753`*^9, 
-   3.911586485683336*^9}, 3.9115866293958635`*^9, 3.9115867660160885`*^9},
+   3.911586485683336*^9}, 3.9115866293958635`*^9, 3.911586765997308*^9, {
+   3.91158892268918*^9, 3.9115889784724355`*^9}, 3.9115890534707556`*^9, 
+   3.9116603763369465`*^9, {3.9116604504584484`*^9, 3.911660465515773*^9}},
  CellLabel->
-  "Out[170]=",ExpressionUUID->"88da6bd0-fba3-42ef-93c8-560f6fbc7a8d"]
+  "Out[347]=",ExpressionUUID->"227fb61e-e24d-4867-b796-766c65fab0de"]
 }, Open  ]]
 },
-WindowSize->{574.8, 609.6},
-WindowMargins->{{-4.8, Automatic}, {Automatic, 0}},
+WindowSize->{574.8, 604.8},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
 TaggingRules-><|"TryRealOnly" -> False|>,
 FrontEndVersion->"13.1 for Microsoft Windows (64-bit) (August 22, 2022)",
 StyleDefinitions->"Default.nb",
@@ -461,13 +566,14 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[580, 22, 10220, 198, 521, "Input",ExpressionUUID->"8901a448-00b7-4b02-ab8f-5c54444f01d5"],
-Cell[10803, 222, 1004, 23, 51, "Output",ExpressionUUID->"ee645b80-9218-47a4-ad46-35b12b1ca017"]
+Cell[580, 22, 11515, 240, 574, "Input",ExpressionUUID->"8901a448-00b7-4b02-ab8f-5c54444f01d5"],
+Cell[12098, 264, 2001, 52, 65, "Output",ExpressionUUID->"4f0c7983-6cf8-41e9-8a88-0bcc88f41253"]
 }, Open  ]],
+Cell[14114, 319, 156, 3, 29, "Input",ExpressionUUID->"e5206df1-eccc-468d-a982-cbd81e31384b"],
 Cell[CellGroupData[{
-Cell[11844, 250, 5806, 165, 556, "Input",ExpressionUUID->"a5ea414e-8ef3-4cdc-84ec-1d430f03db7b"],
-Cell[17653, 417, 695, 15, 53, "Output",ExpressionUUID->"76e9a4b5-1e1f-4205-b991-e440e5a924ba"],
-Cell[18351, 434, 417, 7, 29, "Output",ExpressionUUID->"88da6bd0-fba3-42ef-93c8-560f6fbc7a8d"]
+Cell[14295, 326, 6232, 176, 539, "Input",ExpressionUUID->"a5ea414e-8ef3-4cdc-84ec-1d430f03db7b"],
+Cell[20530, 504, 676, 12, 29, "Output",ExpressionUUID->"07f0aabd-b3c7-47e2-bb15-ad1f0926b845"],
+Cell[21209, 518, 1448, 28, 199, "Output",ExpressionUUID->"227fb61e-e24d-4867-b796-766c65fab0de"]
 }, Open  ]]
 }
 ]
